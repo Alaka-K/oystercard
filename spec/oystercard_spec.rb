@@ -51,22 +51,21 @@ require "oystercard"
     end
 
     describe "#touch_out" do
-      it "can touch out" do
+      before(:each) do
         subject.top_up(Oystercard::MINIMUM_AMOUNT)
         subject.touch_in(entry_station)
+      end
+
+      it "can touch out" do
         subject.touch_out(exit_station)
         expect(subject.in_journey?).to eq false
       end
 
       it "on touch out it will deduct from balance " do
-        subject.top_up(Oystercard::MINIMUM_AMOUNT)
-        subject.touch_in(entry_station)
         expect { subject.touch_out(exit_station) }.to change { subject.balance }.by(-Oystercard::MINIMUM_AMOUNT)
       end
 
       it "remembers exit station" do
-        subject.top_up(Oystercard::MINIMUM_AMOUNT)
-        subject.touch_in(entry_station)
         subject.touch_out(exit_station)
         expect(subject.exit_station).to eq(exit_station)
       end
