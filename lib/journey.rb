@@ -13,17 +13,17 @@ class Journey
   end
 
   def fare
-    PENALTY_FARE unless complete? 
-    MINIMUM_FARE
+    return PENALTY_FARE unless complete? 
+
+    return MINIMUM_FARE
   end
 
-
   def complete?
-    @other_station ? true : false
+    @exit_station ? true : false
   end
 
   def finish(other_station)
-    @other_station = other_station
+    @exit_station = other_station
   end
 end
 

@@ -18,32 +18,22 @@ RSpec.describe Journey do
       expect(subject.entry_station).to eq(entry_station)
     end
 
-    it "return penalty fare if no entry station" do
-        subject.entry_station
-        subject.exit_station = nil
-        expect(subject.fare).to eq(Journey::PENALTY_FARE)
-    end
   end
 
   it "returns minimun fare" do
-    subject.entry_station
-    subject.exit_station
+    subject.finish(exit_station) #
     expect(subject.fare).to eq (Journey::MINIMUM_FARE)
   end
 
   context "given an exit station" do
     
-    # it "has an exit station" do
-    #     expect(subject.exit_station).to eq(exit_station)
-    # end
-
     it "respond penalty fare" do
         expect(subject).to respond_to(:fare)
     end
-
+  end
  
-
     it "tell if the journey is not complete" do
+      subject.exit_station = nil
       expect(subject).not_to be_complete
     end
 
@@ -52,14 +42,12 @@ RSpec.describe Journey do
     end
 
     it "return penalty fare if no entry station" do
-        subject.entry_station = nil
-        subject.exit_station
-        expect(subject.fare).to eq(Journey::PENALTY_FARE)
+      subject.exit_station = nil
+      expect(subject.fare).to eq(Journey::PENALTY_FARE)
       end
   
     it "complete the journey" do
-    
+      expect(subject.complete?).to eq true #
     end
-  end
  
 end
