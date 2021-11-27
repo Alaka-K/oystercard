@@ -1,12 +1,13 @@
-require 'station'
+# frozen_string_literal: true
+
+require "station"
 
 RSpec.describe Station do
   let(:name) { double("name") }
   let(:zone) { double(1) }
-  subject {described_class.new(name, zone)}
+  subject { described_class.new(name, zone) }
 
   describe "#initialize" do
-    
     it "initialize with name" do
       expect(subject.name).to eq(name)
     end

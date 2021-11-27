@@ -4,11 +4,11 @@ require_relative "oystercard"
 class Oystercard
   LIMIT = 90
   MINIMUM_AMOUNT = 1
-  attr_reader :balance, :in_journey, :entry_station, :exit_station
-  attr_accessor :journeys
+  attr_reader :balance, :entry_station, :exit_station, :journeys
+
   def initialize
     @balance = 0
-    @journeys = []
+    # @journeys = []
   end
 
   def top_up(money)
@@ -26,7 +26,7 @@ class Oystercard
   def touch_out(exit_station)
     deduct(MINIMUM_AMOUNT)
     @exit_station = exit_station
-    @journeys << { entry_station: @entry_station, exit_station: exit_station }
+    # @journeys << { entry_station: @entry_station, exit_station: exit_station }
     @entry_station = nil
   end
 
@@ -35,7 +35,7 @@ class Oystercard
   end
 
   def in_journey?
-    @entry_station == nil ? false : true
+    @entry_station.nil? ? false : true
   end
 
   private
